@@ -43,7 +43,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="py-24 bg-white">
+    <section id="features" className="py-24 bg-white">
       <div className="container">
         <h2 className="text-4xl font-bold text-center mb-16">
           Powerful Features for Climate Risk Management

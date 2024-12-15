@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { name: "Features", href: "#features" },
-  { name: "Benefits", href: "#benefits" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Contact", href: "#contact" }
+  { name: "Benefits", href: "/#benefits" },
+  { name: "Features", href: "/#features" },
+  { name: "Pricing", href: "/#pricing" },
+  { name: "Contact", href: "/#contact" }
 ]
 
 export function Navigation() {
