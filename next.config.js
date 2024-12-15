@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
-    domains: ['i.pravatar.cc'],
+    unoptimized: true,
   },
+  basePath: '',
+  assetPrefix: '',
 }
 
 module.exports = nextConfig 
