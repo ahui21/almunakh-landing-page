@@ -25,7 +25,7 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section id="benefits" className="py-24 bg-gray-50">
       <div className="container">
         <h2 className="text-4xl font-bold text-center mb-16">
           Transform Climate Challenges into Competitive Advantages

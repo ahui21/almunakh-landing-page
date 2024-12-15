@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 export function Contact() {
   return (
-    <section className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-white">
       <div className="container">
         <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div>
