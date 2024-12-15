@@ -3,9 +3,17 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    domains: ['via.placeholder.com', 'placehold.co'],
   },
   basePath: '',
-  assetPrefix: '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://almunakh.com' : '',
+  trailingSlash: true,
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig
