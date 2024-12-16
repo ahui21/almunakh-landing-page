@@ -2,78 +2,121 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const navLinks = [
-  { name: "Benefits", href: "/#benefits" },
-  { name: "Features", href: "/#features" },
-  { name: "Pricing", href: "/#pricing" },
-  { name: "Contact", href: "/#contact" }
-]
+import { Menu, X } from "lucide-react"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
-  return (
-    <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b">
-      <div className="container">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="font-bold text-xl text-primary">
-            Almunakh™
-          </Link>
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-600 hover:text-primary transition-colors"
+  const navLinks = [
+    { href: "#benefits", label: "Benefits" },
+    { href: "#features", label: "Features" },
+    { href: "#case-studies", label: "Success Stories" }
+  ]
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
+      <div className="container">
+        <div className="flex h-16 items-center justify-between">
+          <div className="flex gap-8 items-center">
+            <Link 
+              href="/" 
+              className="text-xl font-bold text-white hover:opacity-90 transition-opacity"
+              onClick={scrollToTop}
+            >
+              Almunakh
+            </Link>
+            
+            <nav className="hidden md:block">
+              <ul className="flex gap-6">
+                {navLinks.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link 
+                      href={href} 
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                className="text-gray-300 hover:text-white"
+                asChild
+              >
+                <Link href="/login">Log in</Link>
+              </Button>
+              <Button 
+                className="bg-primary hover:bg-primary/90"
+                asChild
+              >
+                <Link href="/signup">Sign up</Link>
+              </Button>
+            </div>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-white"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div 
+            className="md:hidden py-4 border-t border-white/10"
+            style={{
+              animation: "slideDown 200ms ease-out"
+            }}
+          >
+            <nav className="space-y-4">
+              {navLinks.map(({ href, label }) => (
+                <Link 
+                  key={href}
+                  href={href}
+                  className="block text-gray-300 hover:text-white transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  {link.name}
+                  {label}
                 </Link>
               ))}
-            </div>
-            <Button>Get Started</Button>
+              <div className="pt-4 space-y-2">
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-gray-300 hover:text-white"
+                  asChild
+                >
+                  <Link href="/login">Log in</Link>
+                </Button>
+                <Button 
+                  className="w-full bg-primary hover:bg-primary/90"
+                  asChild
+                >
+                  <Link href="/signup">Sign up</Link>
+                </Button>
+              </div>
+            </nav>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </div>
+        )}
       </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="block px-3 py-2 text-gray-600 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="px-3 py-2">
-              <Button className="w-full">Get Started</Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </nav>
+    </header>
   )
 } 

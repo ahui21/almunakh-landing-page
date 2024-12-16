@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button"
 
 export function CTA() {
   return (
-    <section className="py-24 bg-primary">
+    <section className="py-32 bg-primary">
       <div className="container">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 whitespace-nowrap">
             Ready to Climate-Proof Your Business?
           </h2>
           <p className="text-xl md:text-2xl mb-8 text-white/90">
-            Join leading organizations using Almunakh to turn climate challenges into competitive advantages.
+            Join leading organizations who are using Almunakh to <br />turn their climate data into a competitive advantage.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -30,7 +30,7 @@ export function CTA() {
             </Button>
           </div>
           <p className="mt-6 text-white/80">
-            No credit card required • 14-day free trial • Full platform access
+            No credit card required • Unlimited basic platform access
           </p>
         </div>
       </div>

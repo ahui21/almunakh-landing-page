@@ -1,83 +1,69 @@
 import * as React from "react"
-import { Star } from "lucide-react"
 import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card"
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "Chief Risk Officer",
-    company: "Global Logistics Co.",
-    image: "/testimonials/sarah.jpg",
-    quote: "Almunakh has transformed how we approach climate risk. Their predictive modeling saved us millions in potential losses.",
-    rating: 5
+    quote: "Almunakh has transformed how we approach climate risk. Their insights have been invaluable for our long-term planning.",
+    author: "Sarah Chen",
+    title: "Chief Sustainability Officer",
+    company: "Global Innovations Inc.",
+    avatar: "/avatars/sarah-chen.jpg"
   },
   {
-    name: "Michael Rodriguez",
-    role: "Sustainability Director",
-    company: "EcoTech Industries",
-    image: "/testimonials/michael.jpg",
-    quote: "The real-time monitoring and alerts have been game-changing for our operations across multiple locations.",
-    rating: 5
+    quote: "The real-time analytics and adaptive strategies have helped us stay ahead of climate-related disruptions.",
+    author: "Michael Rodriguez",
+    title: "Operations Director",
+    company: "EcoTech Solutions",
+    avatar: "/avatars/michael-rodriguez.jpg"
   },
   {
-    name: "Emma Thompson",
-    role: "Operations Manager",
-    company: "Sustainable Solutions Ltd",
-    image: "/testimonials/emma.jpg",
-    quote: "Their platform's ease of use and comprehensive insights have made climate risk management accessible and actionable.",
-    rating: 5
+    quote: "Their platform's predictive capabilities have saved us millions in potential climate-related losses.",
+    author: "Emma Thompson",
+    title: "Risk Management Lead",
+    company: "Sustainable Futures Ltd",
+    avatar: "/avatars/emma-thompson.jpg"
   }
 ]
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-secondary-yellow/5">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Trusted by Industry Leaders
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            See how organizations are using Almunakh to transform their approach to climate risk management
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-16">
+          Trusted by Industry Leaders
+        </h2>
+        
+        <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
-            <div 
-              key={testimonial.name}
-              className="bg-white rounded-lg p-8 shadow-lg"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star 
-                    key={i}
-                    className="w-5 h-5 fill-secondary-yellow text-secondary-yellow"
-                  />
-                ))}
-              </div>
-              
-              <blockquote className="text-gray-700 mb-6">
-                "{testimonial.quote}"
-              </blockquote>
-              
-              <div className="flex items-center gap-4">
-                <div className="relative w-12 h-12">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <div>
-                  <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-gray-600">
-                    {testimonial.role}, {testimonial.company}
+            <Card key={testimonial.author} className="bg-white border-none shadow-lg">
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative w-16 h-16 mb-4 rounded-full overflow-hidden">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.author}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
+                  
+                  <blockquote className="text-lg text-gray-600 mb-6">
+                    "{testimonial.quote}"
+                  </blockquote>
+                  
+                  <footer>
+                    <div className="font-semibold">{testimonial.author}</div>
+                    <div className="text-sm text-gray-500">
+                      {testimonial.title}
+                    </div>
+                    <div className="text-sm text-primary">
+                      {testimonial.company}
+                    </div>
+                  </footer>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

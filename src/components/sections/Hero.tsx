@@ -6,10 +6,7 @@ import { Play } from "lucide-react"
 export function Hero() {
   return (
     <section className="relative min-h-[80vh] flex items-center bg-black overflow-hidden">
-      <div className="absolute inset-0 opacity-5 bg-[url('/images/noise.png')] pointer-events-none">
-        {/* Optional noise texture overlay */}
-      </div>
-      
+      <div className="absolute inset-0 opacity-5 bg-[url('/images/noise.png')] pointer-events-none" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-3">
@@ -30,7 +27,7 @@ export function Hero() {
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-white w-full text-base py-4"
                   >
-                    Get Your Climate Impact Assessment
+                    Get Your Almunakh Assessment
                   </Button>
                 </div>
                 
@@ -40,7 +37,7 @@ export function Hero() {
                   className="border-secondary-green text-secondary-green hover:bg-secondary-green/10 w-full sm:w-auto text-base py-4"
                 >
                   <Play className="mr-2 h-4 w-4" />
-                  Watch 2-Minute Demo
+                  Watch Demo
                 </Button>
               </div>
               
@@ -52,11 +49,13 @@ export function Hero() {
 
           <div className="relative h-[500px] hidden md:block md:col-span-2">
             <Image
-              src="/images/hero-image.png"
-              alt="Climate Risk Dashboard"
+              src="/images/rotating-earth-optimized.gif"
+              alt="Climate Risk Dashboard Animation"
               fill
               className="object-contain"
               priority
+              unoptimized
+              sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
         </div>

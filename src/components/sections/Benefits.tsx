@@ -4,20 +4,20 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 const benefits = [
   {
-    title: "Financial Protection",
-    description: "Minimize unexpected climate-related financial losses with predictive modeling to anticipate potential disruptions.",
+    title: "Proactive Risk Management",
+    description: "Anticipate weather risks before they impact you. We monitor weather patterns for you and provide real-time alerts.",
     icon: Shield,
     color: "text-primary"
   },
   {
-    title: "Strategic Opportunity Identification",
-    description: "Discover revenue opportunities emerging from climate shifts with adaptive business strategy development.",
+    title: "Growth Through Climate Opportunities",
+    description: "Unlock new revenue streams specific to your business. Capture growth today and future-proof your business for tomorrow.",
     icon: TrendingUp,
     color: "text-secondary-green"
   },
   {
-    title: "Operational Resilience",
-    description: "Real-time risk monitoring and alerts with customized mitigation action plans.",
+    title: "Simplified, Automated Intelligence",
+    description: "Leverage clear, jargon-free insights tailored for executives. We translate complex climate data into actionable insights you can use immediately.",
     icon: Network,
     color: "text-secondary-yellow"
   }
@@ -25,19 +25,22 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <section id="benefits" className="py-24 bg-gray-50">
+    <section id="benefits" className="py-24 bg-secondary-green/5">
       <div className="container">
         <h2 className="text-4xl font-bold text-center mb-16">
-          Transform Climate Challenges into Competitive Advantages
+          Stay Ahead of the Competition with Climate-Driven Insights
         </h2>
         
         <div className="grid md:grid-cols-3 gap-8">
           {benefits.map((benefit) => {
             const Icon = benefit.icon
             return (
-              <Card key={benefit.title} className="border-none shadow-lg">
+              <Card 
+                key={benefit.title} 
+                className="border-none shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:z-10 cursor-pointer bg-white hover:bg-gradient-to-b hover:from-white hover:to-gray-50"
+              >
                 <CardHeader>
-                  <Icon className={`w-12 h-12 ${benefit.color} mb-4`} />
+                  <Icon className={`w-12 h-12 ${benefit.color} mb-4 transition-transform duration-300 group-hover:scale-110`} />
                   <CardTitle className="text-xl">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>

@@ -1,90 +1,87 @@
 import * as React from "react"
-import { Brain, Monitor, Route } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { 
+  BarChart3, 
+  Shield, 
+  AlertCircle, 
+  LineChart, 
+  Settings, 
+  Zap 
+} from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
 
 const features = [
   {
-    id: "predictive",
-    title: "Advanced Predictive Modeling",
-    icon: Brain,
-    color: "text-primary",
-    description: "Harness the power of machine learning for global climate data integration and micro-regional risk assessment.",
-    details: [
-      "Machine learning algorithms",
-      "Global climate data integration",
-      "Micro-regional risk assessment"
-    ]
+    title: "Advanced Risk Analytics",
+    description: "Leverage AI-powered analytics to identify and quantify climate-related risks specific to your business operations.",
+    icon: BarChart3,
+    color: "text-primary"
   },
   {
-    id: "dashboard",
-    title: "Real-Time Risk Dashboard",
-    icon: Monitor,
-    color: "text-secondary-green",
-    description: "Interactive geospatial risk visualization with customizable alert systems and scenario planning tools.",
-    details: [
-      "Interactive geospatial risk visualization",
-      "Customizable alert systems",
-      "Scenario planning tools"
-    ]
+    title: "Real-time Monitoring",
+    description: "Stay informed with continuous monitoring of weather patterns, climate trends, and potential disruptions.",
+    icon: Shield,
+    color: "text-secondary-green"
   },
   {
-    id: "framework",
-    title: "Adaptive Action Frameworks",
-    icon: Route,
-    color: "text-secondary-yellow",
-    description: "Automated risk mitigation recommendations with business continuity planning and cost-benefit analysis.",
-    details: [
-      "Automated risk mitigation recommendations",
-      "Business continuity planning",
-      "Cost-benefit analysis of intervention strategies"
-    ]
+    title: "Early Warning System",
+    description: "Receive automated alerts and notifications about potential climate risks before they impact your operations.",
+    icon: AlertCircle,
+    color: "text-secondary-yellow"
+  },
+  {
+    title: "Predictive Modeling",
+    description: "Forecast potential climate impacts using advanced modeling techniques and historical data analysis.",
+    icon: LineChart,
+    color: "text-primary"
+  },
+  {
+    title: "Customizable Solutions",
+    description: "Tailor our platform to your specific industry needs with flexible configuration options.",
+    icon: Settings,
+    color: "text-secondary-green"
+  },
+  {
+    title: "Instant Insights",
+    description: "Get actionable insights and recommendations delivered through an intuitive dashboard interface.",
+    icon: Zap,
+    color: "text-secondary-yellow"
   }
 ]
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-white">
+    <section id="features" className="py-32 bg-primary/5">
       <div className="container">
-        <h2 className="text-4xl font-bold text-center mb-16">
-          Powerful Features for Climate Risk Management
-        </h2>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4">
+            Comprehensive Climate Risk Management
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our platform provides everything you need to identify, monitor, and mitigate climate-related risks to your business.
+          </p>
+        </div>
 
-        <Tabs defaultValue="predictive" className="max-w-4xl mx-auto">
-          <TabsList className="grid grid-cols-3 mb-8">
-            {features.map((feature) => (
-              <TabsTrigger 
-                key={feature.id}
-                value={feature.id}
-                className="flex items-center gap-2"
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((feature) => {
+            const Icon = feature.icon
+            return (
+              <Card 
+                key={feature.title}
+                className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <feature.icon className={`w-5 h-5 ${feature.color}`} />
-                <span className="hidden md:inline">{feature.title}</span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {features.map((feature) => (
-            <TabsContent key={feature.id} value={feature.id}>
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 mb-6">{feature.description}</p>
-                  <ul className="space-y-3">
-                    {feature.details.map((detail, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${feature.color.replace('text', 'bg')}`} />
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-gray-100 rounded-lg p-8 aspect-square flex items-center justify-center">
-                  <feature.icon className={`w-32 h-32 ${feature.color}`} />
-                </div>
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+                <CardContent className="pt-6">
+                  <Icon className={`w-12 h-12 ${feature.color} mb-6`} />
+                  <h3 className="text-xl font-semibold mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

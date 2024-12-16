@@ -1,73 +1,75 @@
 import * as React from "react"
 import { Check } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const plans = [
   {
-    name: "Essential",
+    name: "Starter",
     price: "499",
     description: "Perfect for small businesses starting their climate journey",
     features: [
-      "Basic risk assessment",
-      "Monthly reports",
+      "Basic climate risk assessment",
+      "Monthly risk reports",
       "Email support",
-      "Basic data integration",
-      "Up to 3 locations"
+      "Basic analytics dashboard",
+      "Up to 3 team members"
     ]
   },
   {
     name: "Professional",
     price: "999",
-    description: "Comprehensive protection for growing organizations",
+    description: "Ideal for growing companies with complex needs",
     features: [
       "Advanced risk modeling",
-      "Weekly reports",
-      "24/7 phone support",
-      "Full data integration",
-      "Up to 10 locations",
-      "Custom action plans"
+      "Weekly detailed reports",
+      "24/7 priority support",
+      "Advanced analytics & forecasting",
+      "Up to 10 team members",
+      "Custom action plans",
+      "API access"
     ],
     popular: true
   },
   {
     name: "Enterprise",
     price: "Custom",
-    description: "Full-scale solution for large organizations",
+    description: "For large organizations requiring comprehensive solutions",
     features: [
       "Custom risk modeling",
-      "Real-time reporting",
+      "Real-time monitoring & alerts",
       "Dedicated account manager",
-      "API access",
-      "Unlimited locations",
+      "Full API access",
+      "Unlimited team members",
       "Custom integrations",
-      "On-site training"
+      "On-site training",
+      "Compliance reporting"
     ]
   }
 ]
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24 bg-gray-50">
+    <section id="pricing" className="py-24 bg-gradient-to-b from-white to-primary/5">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            Transparent Pricing for Every Scale
+            Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-600">
-            Choose the plan that fits your organization's needs
+            Choose the plan that best fits your needs
           </p>
         </div>
-
+        
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => (
             <Card 
               key={plan.name}
-              className={`relative ${plan.popular ? 'border-primary shadow-lg scale-105' : ''}`}
+              className={`relative ${plan.popular ? 'border-primary shadow-xl' : 'border-gray-200'}`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+                  <span className="bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
                     Most Popular
                   </span>
                 </div>
@@ -79,22 +81,29 @@ export function Pricing() {
                   <span className="text-4xl font-bold">
                     ${plan.price}
                   </span>
-                  {plan.price !== "Custom" && <span>/month</span>}
+                  {plan.price !== "Custom" && (
+                    <span className="text-gray-600">/month</span>
+                  )}
                 </div>
-                <p className="text-gray-600 mt-4">{plan.description}</p>
+                <p className="text-gray-600 mt-4">
+                  {plan.description}
+                </p>
               </CardHeader>
               
               <CardContent>
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2">
-                      <Check className="text-secondary-green w-5 h-5" />
+                    <li key={feature} className="flex items-center">
+                      <Check className="text-primary w-5 h-5 mr-2 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 
-                <Button className="w-full mt-8">
+                <Button 
+                  className={`w-full mt-8 ${plan.popular ? 'bg-primary' : ''}`}
+                  variant={plan.popular ? "default" : "outline"}
+                >
                   Get Started
                 </Button>
               </CardContent>
