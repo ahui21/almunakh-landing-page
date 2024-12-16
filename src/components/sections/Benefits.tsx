@@ -27,7 +27,7 @@ export function Benefits() {
   return (
     <section id="benefits" className="py-24 bg-secondary-green/5">
       <div className="container">
-        <h2 className="text-4xl font-bold text-center mb-16">
+        <h2 className="text-4xl font-bold text-center mb-12">
           Stay Ahead of the Competition with Climate-Driven Insights
         </h2>
         

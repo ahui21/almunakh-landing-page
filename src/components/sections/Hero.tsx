@@ -11,12 +11,14 @@ export function Hero() {
         <div className="grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-3">
             <h1 className="text-3xl md:text-[40px] font-bold text-white mb-6 leading-tight">
-              Turn Climate Uncertainty into<br />
+              Turn Climate Uncertainty into
+              <br className="hidden md:block" />
               Business Resilience — Instantly.
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Real-time risk assessment and adaptive strategies that<br />
+              Real-time risk assessment and adaptive strategies that
+              <br className="hidden md:block" />
               protect your bottom line and unlock hidden opportunities
             </p>
             

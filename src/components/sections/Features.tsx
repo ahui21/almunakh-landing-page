@@ -50,16 +50,14 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-32 bg-primary/5">
+    <section id="features" className="py-24 bg-primary/5">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Comprehensive Climate Risk Management
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our platform provides everything you need to identify, monitor, and mitigate climate-related risks to your business.
-          </p>
-        </div>
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Comprehensive Climate Risk Management
+        </h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
+          Our platform provides everything you need to identify, monitor, and mitigate climate-related risks to your business.
+        </p>
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature) => {

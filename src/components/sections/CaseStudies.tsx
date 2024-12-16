@@ -45,16 +45,14 @@ const caseStudies = [
 
 export function CaseStudies() {
   return (
-    <section id="case-studies" className="py-32 bg-secondary-yellow/5">
+    <section id="case-studies" className="py-24 bg-secondary-yellow/5">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Success Stories
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            See how leading organizations are using Almunakh to transform climate challenges into competitive advantages
-          </p>
-        </div>
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Success Stories
+        </h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
+          See how leading organizations are using Almunakh to transform climate challenges into competitive advantages
+        </p>
 
         <div className="grid md:grid-cols-3 gap-8">
           {caseStudies.map((study) => (

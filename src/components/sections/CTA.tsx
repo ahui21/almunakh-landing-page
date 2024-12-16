@@ -7,11 +7,13 @@ export function CTA() {
     <section className="py-32 bg-primary">
       <div className="container">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 whitespace-nowrap">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             Ready to Climate-Proof Your Business?
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-white/90">
-            Join leading organizations who are using Almunakh to <br />turn their climate data into a competitive advantage.
+          <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90">
+            Join leading organizations who are using Almunakh to
+            <br className="hidden md:block" />
+            turn their climate data into a competitive advantage.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
