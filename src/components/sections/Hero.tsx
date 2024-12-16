@@ -11,7 +11,7 @@ export function Hero() {
         <div className="grid md:grid-cols-5 gap-8 items-center">
           <div className="md:col-span-3">
             <h1 className="text-3xl md:text-[40px] font-bold text-white mb-6 leading-tight">
-              Turn Climate Uncertainty into
+              Turn Climate Uncertainty into 
               <br className="hidden md:block" />
               Business Resilience — Instantly.
             </h1>

@@ -7,7 +7,7 @@ export function CTA() {
     <section className="py-32 bg-primary">
       <div className="container">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 whitespace-nowrap px-4">
             Ready to Climate-Proof Your Business?
           </h2>
           <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90">
