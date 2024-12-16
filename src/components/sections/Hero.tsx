@@ -17,7 +17,7 @@ export function Hero() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Real-time risk assessment and adaptive strategies that
+              Real-time risk assessment and adaptive strategies that 
               <br className="hidden md:block" />
               protect your bottom line and unlock hidden opportunities
             </p>

@@ -51,7 +51,7 @@ export function CaseStudies() {
           Success Stories
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
-          See how leading organizations are using Almunakh to transform climate challenges into competitive advantages
+          See how leading organizations are using climate data to transform weather impacts into competitive advantages
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
