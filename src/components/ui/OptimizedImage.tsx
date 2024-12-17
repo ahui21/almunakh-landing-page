@@ -26,7 +26,6 @@ export function OptimizedImage({
   quality = 90,
   unoptimized = false,
 }: OptimizedImageProps) {
-  // Only generate different formats if not unoptimized and not a GIF
   const isGif = src.endsWith('.gif')
   const shouldOptimize = !unoptimized && !isGif
   
@@ -51,14 +50,18 @@ export function OptimizedImage({
         alt={alt}
         fill={fill}
         priority={priority}
-        className={cn("object-cover", className)}
+        className={cn(
+          "object-cover",
+          isGif && "mix-blend-normal bg-transparent",
+          className
+        )}
         sizes={sizeString}
         quality={quality}
         loading={priority ? "eager" : "lazy"}
         unoptimized={unoptimized}
         blurDataURL={`data:image/svg+xml;base64,${Buffer.from(
           `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100%" height="100%" fill="#e2e8f0"/>
+            <rect width="100%" height="100%" fill="transparent"/>
           </svg>`
         ).toString('base64')}`}
         placeholder="blur"
