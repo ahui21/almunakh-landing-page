@@ -7,15 +7,16 @@ declare global {
   interface Window {
     gtag: (
       command: 'event' | 'config' | 'js',
-      eventName: string,
+      eventName: string | Date,
       eventParams?: {
         event_category?: string
         event_label?: string
         value?: number | string
+        send_to?: string
         [key: string]: any
       }
     ) => void
-    dataLayer: any[]
+    dataLayer: Array<any>
   }
 }
 

@@ -40,10 +40,20 @@ interface AnalyticsEvent {
   isOwnDevice: boolean
 }
 
-const EVENT_TYPES = ['click', 'pageview', 'error', 'scroll', 'timing'] as const
-type EventType = typeof EVENT_TYPES[number]
+const EVENT_TYPES = ['click', 'pageview', 'error', 'scroll', 'timing'] as EventType[]
+type EventType = 'click' | 'pageview' | 'error' | 'scroll' | 'timing'
 
 const COLORS = ['#2D7DD2', '#069D27', '#DF2935', '#FDCA40', '#6366f1']
+
+type SortConfig = {
+  key: keyof AnalyticsEvent
+  direction: 'asc' | 'desc'
+}
+
+type FilterState = {
+  text: string
+  userType: string
+}
 
 export default function AnalyticsDashboard() {
   const [events, setEvents] = React.useState<AnalyticsEvent[]>([])

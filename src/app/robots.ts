@@ -1,12 +1,14 @@
 import { MetadataRoute } from 'next'
- 
+
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = 'https://almunakh.com'
+  
   return {
     rules: {
       userAgent: '*',
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://almunakh.com/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 } 
