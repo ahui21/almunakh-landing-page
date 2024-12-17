@@ -5,6 +5,7 @@ import "./globals.css"
 import { Toaster } from 'sonner'
 import Script from 'next/script'
 import { ClientLayout } from "@/components/ClientLayout"
+import { GA_ID } from '@/lib/constants'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -49,8 +50,6 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   }
 } satisfies Metadata
-
-const GA_ID = 'G-T7YGE17L4W'
 
 export default function RootLayout({
   children,

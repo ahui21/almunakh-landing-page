@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useEffect, useCallback, useState } from 'react'
+import { GA_ID } from '@/lib/constants'
 
 declare global {
   interface Window {
@@ -80,6 +81,7 @@ const useTracking = () => {
       event_category: category,
       event_label: label,
       value: value,
+      send_to: GA_ID,
       // Location parameters
       page_location: window.location.href,
       page_path: window.location.pathname,

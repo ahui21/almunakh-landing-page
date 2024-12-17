@@ -5,6 +5,7 @@ import { Play } from "lucide-react"
 import Link from "next/link"
 import { JsonLd } from "@/components/JsonLd"
 import useTracking from "@/hooks/useTracking"
+import { GA_ID } from '@/lib/constants'
 
 export function Hero() {
   const { trackEvent } = useTracking();
@@ -103,13 +104,12 @@ export function Hero() {
       </section>
       <Button 
         onClick={() => {
-          // Send a standard GA4 event
           window.gtag('event', 'button_click', {
-            debug_mode: true,  // Enable debug for this event
+            debug_mode: true,
             event_category: 'engagement',
             event_label: 'Test Button',
             value: 1,
-            send_to: GA_ID  // Add explicit destination
+            send_to: GA_ID
           });
           console.log('Test event sent with debug mode');
         }}
