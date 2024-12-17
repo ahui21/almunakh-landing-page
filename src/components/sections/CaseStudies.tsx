@@ -63,7 +63,7 @@ export function CaseStudies() {
               <div className="relative h-48">
                 <Image
                   src={study.image}
-                  alt={study.title}
+                  alt={`${study.company} case study showing ${study.title} with ${study.metrics[0].value} ${study.metrics[0].label}`}
                   fill
                   className="object-cover"
                 />

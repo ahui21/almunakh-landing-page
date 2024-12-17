@@ -1,7 +1,17 @@
+"use client"
+
 import * as React from "react"
 import { Mail, MapPin } from "lucide-react"
+import useTracking from "@/hooks/useTracking"
 
 export function Footer() {
+  const { trackDeadLink } = useTracking()
+  
+  const handleDeadLink = (e: React.MouseEvent<HTMLAnchorElement>, name: string) => {
+    e.preventDefault()
+    trackDeadLink(name, e.currentTarget.href)
+  }
+
   return (
     <footer className="bg-gray-900 text-gray-300 py-8">
       <div className="container">

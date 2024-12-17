@@ -1,10 +1,16 @@
+"use client"
+
 import * as React from "react"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import useTracking from "@/hooks/useTracking"
+import Link from "next/link"
 
 export function CTA() {
+  const { trackClick } = useTracking()
+
   return (
-    <section className="py-32 bg-primary">
+    <section id="cta" className="py-32 bg-primary">
       <div className="container">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 whitespace-nowrap px-4">
@@ -18,17 +24,23 @@ export function CTA() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="bg-white text-primary hover:bg-white/90"
+              className="bg-secondary-green text-white hover:bg-secondary-green/90"
+              asChild
             >
-              Start Free Trial
+              <Link href="https://app.almunakh.com">
+                Get Your Initial Assessment Now
+              </Link>
             </Button>
             <Button 
               size="lg"
               variant="outline"
               className="border-white text-white hover:bg-white/10"
+              asChild
             >
-              Schedule Demo
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <Link href="https://demo.almunakh.com">
+                Schedule Demo
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </Button>
           </div>
           <p className="mt-6 text-white/80">

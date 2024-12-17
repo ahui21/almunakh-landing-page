@@ -2,18 +2,63 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import useTracking from "@/hooks/useTracking"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+  const { trackClick } = useTracking()
+  const [isInHero, setIsInHero] = React.useState(true)
+
+  // Add scroll handler
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.getElementById('hero')
+      if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom
+        setIsInHero(heroBottom > 0)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check initial position
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    trackClick('Navigation', href)
+
+    // If we're not on the homepage, navigate there first
+    if (pathname !== '/') {
+      router.push('/')
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.querySelector(href)
+        element?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    } else {
+      // If we're already on homepage, just scroll
+      const element = document.querySelector(href)
+      element?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+    if (pathname !== '/') {
+      router.push('/')
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
   }
 
   const navLinks = [
@@ -23,7 +68,11 @@ export function Navigation() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/10 transition-colors duration-300 ${
+        isInHero ? 'bg-primary/90' : 'bg-black/90'
+      }`}
+    >
       <div className="container">
         <div className="flex h-16 items-center justify-between">
           <div className="flex gap-8 items-center">
@@ -42,6 +91,7 @@ export function Navigation() {
                     <Link 
                       href={href} 
                       className="text-gray-300 hover:text-white transition-colors"
+                      onClick={(e) => handleNavigation(e, href)}
                     >
                       {label}
                     </Link>
@@ -54,14 +104,14 @@ export function Navigation() {
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-4">
               <Button 
-                variant="ghost" 
-                className="text-gray-300 hover:text-white"
+                variant="outline" 
+                className="text-gray-300 hover:text-white bg-gray-800 hover:bg-gray-700"
                 asChild
               >
                 <Link href="/login">Log in</Link>
               </Button>
               <Button 
-                className="bg-primary hover:bg-primary/90"
+                className="bg-blue-600 hover:bg-blue-500 text-white"
                 asChild
               >
                 <Link href="/signup">Sign up</Link>
@@ -93,21 +143,24 @@ export function Navigation() {
                   key={href}
                   href={href}
                   className="block text-gray-300 hover:text-white transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false)
+                    handleNavigation(e, href)
+                  }}
                 >
                   {label}
                 </Link>
               ))}
               <div className="pt-4 space-y-2">
                 <Button 
-                  variant="ghost" 
-                  className="w-full text-gray-300 hover:text-white"
+                  variant="outline" 
+                  className="w-full text-gray-300 hover:text-white bg-gray-800 hover:bg-gray-700"
                   asChild
                 >
                   <Link href="/login">Log in</Link>
                 </Button>
                 <Button 
-                  className="w-full bg-primary hover:bg-primary/90"
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white"
                   asChild
                 >
                   <Link href="/signup">Sign up</Link>

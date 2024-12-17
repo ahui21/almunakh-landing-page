@@ -2,66 +2,98 @@ import * as React from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
+import Link from "next/link"
+import { JsonLd } from "@/components/JsonLd"
 
 export function Hero() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Almunakh",
+    "applicationCategory": "BusinessApplication",
+    "description": "Real-time climate risk assessment and adaptive strategies platform",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+
   return (
-    <section className="relative min-h-[80vh] flex items-center bg-black overflow-hidden">
-      <div className="absolute inset-0 opacity-5 bg-[url('/images/noise.png')] pointer-events-none" />
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-5 gap-8 items-center">
-          <div className="md:col-span-3">
-            <h1 className="text-3xl md:text-[40px] font-bold text-white mb-6 leading-tight">
-              Turn Climate Uncertainty into 
-              <br className="hidden md:block" />
-              Business Resilience — Instantly.
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Real-time risk assessment and adaptive strategies that 
-              <br className="hidden md:block" />
-              protect your bottom line and unlock hidden opportunities
-            </p>
-            
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1 sm:flex-initial">
+    <>
+      <JsonLd data={structuredData} />
+      <section 
+        id="hero" 
+        className="relative min-h-[80vh] flex items-center bg-black overflow-hidden"
+        aria-label="Introduction to Almunakh"
+      >
+        <div className="absolute inset-0 opacity-5 bg-[url('/images/noise.png')] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid md:grid-cols-5 gap-8 items-center">
+            <div className="md:col-span-3">
+              <h1 className="text-3xl md:text-[40px] font-bold text-white mb-6 leading-tight">
+                Turn Climate Uncertainty into{' '}
+                <br className="hidden md:block" />
+                Business Resilience — Instantly.
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-300 mb-8">
+                Real-time risk assessment and adaptive strategies that{' '}
+                <br className="hidden md:block" />
+                protect your bottom line and unlock hidden opportunities
+              </p>
+              
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1 sm:flex-initial">
+                    <Button 
+                      size="lg"
+                      className="bg-secondary-green hover:bg-secondary-green/90 text-white w-full text-base py-4"
+                      asChild
+                    >
+                      <Link href="https://app.almunakh.com">
+                        Get Your Almunakh Assessment
+                      </Link>
+                    </Button>
+                  </div>
+                  
                   <Button 
+                    variant="outline" 
                     size="lg"
-                    className="bg-primary hover:bg-primary/90 text-white w-full text-base py-4"
+                    className="border-primary text-primary hover:bg-primary/10 w-full sm:w-auto text-base py-4"
+                    asChild
                   >
-                    Get Your Almunakh Assessment
+                    <Link href="https://demo.almunakh.com">
+                      <Play className="mr-2 h-4 w-4" />
+                      Watch Demo
+                    </Link>
                   </Button>
                 </div>
                 
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-secondary-green text-secondary-green hover:bg-secondary-green/10 w-full sm:w-auto text-base py-4"
-                >
-                  <Play className="mr-2 h-4 w-4" />
-                  Watch Demo
-                </Button>
-              </div>
-              
-              <div className="sm:w-[280px]">
-                <p className="text-base text-gray-400">Start your free trial today.</p>
+                <div className="sm:w-[320px]">
+                  <p className="text-base text-gray-400 whitespace-nowrap">
+                    Try us for free immediately.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="relative h-[500px] hidden md:block md:col-span-2">
-            <Image
-              src="/images/rotating-earth-optimized.gif"
-              alt="Climate Risk Dashboard Animation"
-              fill
-              className="object-contain"
-              priority
-              unoptimized
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
+            <div className="relative h-[500px] hidden md:block md:col-span-2">
+              <Image
+                src="/images/rotating-earth-optimized.gif"
+                alt="Interactive climate risk dashboard visualization"
+                fill
+                className="object-contain"
+                priority
+                loading="eager"
+                unoptimized
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 } 
