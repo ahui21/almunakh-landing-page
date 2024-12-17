@@ -26,7 +26,7 @@ interface TrackingEvent {
   label: string
   value?: string | number
   timestamp: number
-  userId?: string
+  userId?: string | null
   userType?: 'anonymous' | 'authenticated'
   sessionId: string
   page: string
@@ -65,7 +65,7 @@ const useTracking = () => {
     if (typeof window === 'undefined') return
 
     // Get user info
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('userId') || undefined
     const sessionId = localStorage.getItem('sessionId') || 
       `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
