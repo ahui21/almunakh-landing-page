@@ -1,11 +1,12 @@
 import * as React from "react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
 import Link from "next/link"
 import { JsonLd } from "@/components/JsonLd"
 import useTracking from "@/hooks/useTracking"
 import { GA_ID } from '@/lib/constants'
+import { OptimizedImage } from "@/components/ui/OptimizedImage"
+import { IMAGES } from "@/lib/images"
 
 export function Hero() {
   const { trackEvent } = useTracking();
@@ -88,15 +89,11 @@ export function Hero() {
             </div>
 
             <div className="relative h-[500px] hidden md:block md:col-span-2">
-              <Image
-                src="/images/rotating-earth-optimized.gif"
-                alt="Interactive climate risk dashboard visualization"
+              <OptimizedImage
+                {...IMAGES.hero.earth}
                 fill
-                className="object-contain"
                 priority
-                loading="eager"
-                unoptimized
-                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-contain"
               />
             </div>
           </div>

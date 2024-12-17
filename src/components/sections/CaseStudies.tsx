@@ -1,5 +1,6 @@
 import * as React from "react"
-import Image from "next/image"
+import { OptimizedImage } from "@/components/ui/OptimizedImage"
+import { IMAGES } from "@/lib/images"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -15,7 +16,7 @@ const caseStudies = [
       "New risks: more frequent unsafe conditions for employees, managed through effective workforce scheduling and investment in new technologies",
       "New opportunities: shift in customer demand for routes to more temperate climates, leading to new revenue streams when proactively planned for",
     ],
-    image: "/images/case-studies/airplane.jpg",
+    image: IMAGES.caseStudies.airline,
     industry: "Airlines"
   },
   {
@@ -27,7 +28,7 @@ const caseStudies = [
       "New risks: higher likelihood of blackouts and power outages during extreme weather events, managed through more resilient energy storage solutions",
       "New opportunities: relocation of customers to more climate-resilient regions, resulting in new revenue streams for suitably-planned future store locations",
     ],
-    image: "/images/case-studies/grocery.jpg",
+    image: IMAGES.caseStudies.retail,
     industry: "Retail"
   },
   {
@@ -39,7 +40,7 @@ const caseStudies = [
       "New opportunities: longer summers introduce new uses such as mountain biking and hiking, which can be monetized through new activities and services",
       "New opportunities: industry-wide challenges enable businesses with climate knowledge to act before their competitors, ensuring growth in market share"
     ],
-    image: "/images/case-studies/skiresort.jpg",
+    image: IMAGES.caseStudies.resort,
     industry: "Tourism"
   }
 ]
@@ -59,12 +60,11 @@ export function CaseStudies() {
           {caseStudies.map((study) => (
             <Card 
               key={study.title}
-              className="overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="overflow-hidden hover:scale-110 transition-transform duration-300 hover:shadow-xl"
             >
               <div className="relative h-48">
-                <Image
-                  src={study.image}
-                  alt={`${study.company} case study showing ${study.title} with ${study.bullets[0]}`}
+                <OptimizedImage
+                  {...study.image}
                   fill
                   className="object-cover"
                 />
