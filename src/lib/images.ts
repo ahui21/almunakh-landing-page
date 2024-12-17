@@ -13,30 +13,15 @@ export const IMAGES = {
   caseStudies: {
     airline: {
       src: '/images/case-studies/airplane.jpg',
-      alt: 'Airline operations optimization through climate risk management',
-      sizes: {
-        mobile: 320,
-        tablet: 480,
-        desktop: 640
-      }
+      alt: 'Airline operations optimization through climate risk management'
     },
     retail: {
-      src: '/images/case-studies/grocery.jpg',
-      alt: 'Retail supply chain optimization with climate analytics',
-      sizes: {
-        mobile: 320,
-        tablet: 480,
-        desktop: 640
-      }
+      src: '/images/case-studies/retail.jpg',
+      alt: 'Retail supply chain optimization with climate analytics'
     },
     resort: {
-      src: '/images/case-studies/skiresort.jpg',
-      alt: 'Mountain resort adapting to climate change impacts',
-      sizes: {
-        mobile: 320,
-        tablet: 480,
-        desktop: 640
-      }
+      src: '/images/case-studies/resort.jpg',
+      alt: 'Mountain resort adapting to climate change impacts'
     }
   }
 } 

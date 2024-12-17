@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { Navigation } from "@/components/Navigation"
 import "./globals.css"
@@ -6,10 +6,13 @@ import { Toaster } from 'sonner'
 import Script from 'next/script'
 import { ClientLayout } from "@/components/ClientLayout"
 import { GA_ID } from '@/lib/constants'
+import { PerformanceMonitor } from '@/components/PerformanceMonitor'
+import { generateSchema } from '@/lib/schema'
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://almunakh.com'),
   title: "Almunakh - Climate Risk Management Platform",
   description: "Transform climate uncertainty into business resilience with Almunakh's real-time risk assessment and adaptive strategies. Get actionable climate insights for your business.",
   keywords: ["climate risk management", "business resilience", "climate analytics", "weather risk", "climate data", "sustainability", "risk assessment"],
@@ -51,17 +54,51 @@ export const metadata: Metadata = {
   }
 } satisfies Metadata
 
+export function generateViewport(): Viewport {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const schema = generateSchema('WebSite', {
+    description: "Climate Risk Management Platform"
+  })
+
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        
+        {/* PWA Tags */}
+        <meta name="application-name" content="Almunakh" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Almunakh" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#000000" />
+
+        {/* Schema.org markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
+          async
+          defer
         />
         <Script 
           id="google-analytics" 
@@ -84,6 +121,7 @@ export default function RootLayout({
           {children}
         </ClientLayout>
         <Toaster />
+        <PerformanceMonitor />
       </body>
     </html>
   )

@@ -94,6 +94,7 @@ export function Hero() {
                 fill
                 priority
                 className="object-contain"
+                unoptimized
               />
             </div>
           </div>

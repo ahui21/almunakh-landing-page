@@ -16,7 +16,10 @@ const caseStudies = [
       "New risks: more frequent unsafe conditions for employees, managed through effective workforce scheduling and investment in new technologies",
       "New opportunities: shift in customer demand for routes to more temperate climates, leading to new revenue streams when proactively planned for",
     ],
-    image: IMAGES.caseStudies.airline,
+    image: {
+      src: '/images/case-studies/airplane.jpg',
+      alt: 'Airline operations optimization through climate risk management'
+    },
     industry: "Airlines"
   },
   {
@@ -28,7 +31,10 @@ const caseStudies = [
       "New risks: higher likelihood of blackouts and power outages during extreme weather events, managed through more resilient energy storage solutions",
       "New opportunities: relocation of customers to more climate-resilient regions, resulting in new revenue streams for suitably-planned future store locations",
     ],
-    image: IMAGES.caseStudies.retail,
+    image: {
+      src: '/images/case-studies/grocery.jpg',
+      alt: 'Retail supply chain optimization with climate analytics'
+    },
     industry: "Retail"
   },
   {
@@ -40,7 +46,10 @@ const caseStudies = [
       "New opportunities: longer summers introduce new uses such as mountain biking and hiking, which can be monetized through new activities and services",
       "New opportunities: industry-wide challenges enable businesses with climate knowledge to act before their competitors, ensuring growth in market share"
     ],
-    image: IMAGES.caseStudies.resort,
+    image: {
+      src: '/images/case-studies/skiresort.jpg',
+      alt: 'Mountain resort adapting to climate change impacts'
+    },
     industry: "Tourism"
   }
 ]
@@ -62,11 +71,17 @@ export function CaseStudies() {
               key={study.title}
               className="overflow-hidden hover:scale-110 transition-transform duration-300 hover:shadow-xl"
             >
-              <div className="relative h-48">
+              <div className="relative h-48 w-full">
                 <OptimizedImage
                   {...study.image}
                   fill
                   className="object-cover"
+                  sizes={{
+                    mobile: 320,
+                    tablet: 480,
+                    desktop: 640
+                  }}
+                  unoptimized
                 />
                 <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-sm">
                   {study.industry}
