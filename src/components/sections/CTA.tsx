@@ -7,7 +7,11 @@ import useTracking from "@/hooks/useTracking"
 import Link from "next/link"
 
 export function CTA() {
-  const { trackClick } = useTracking()
+  const { trackEvent } = useTracking()
+
+  React.useEffect(() => {
+    trackEvent('view', 'section', 'CTA Section');
+  }, [trackEvent]);
 
   return (
     <section id="cta" className="py-32 bg-primary">

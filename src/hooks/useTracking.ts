@@ -61,8 +61,42 @@ const useTracking = () => {
   }, [])
 
   const trackEvent = useCallback((event: string, category: string, label: string, value?: string | number) => {
-    // Only run on client side
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined' || !window.gtag) return
+
+    // Map our events to standard GA4 events
+    const eventMapping = {
+      'section_view': 'page_view',
+      'click': 'click',
+      'pageview': 'page_view',
+      'scroll': 'scroll',
+      'timing': 'user_engagement'
+    };
+
+    const ga4Event = eventMapping[event as keyof typeof eventMapping] || event;
+
+    // Send to Google Analytics
+    window.gtag('event', ga4Event, {
+      // Standard GA4 parameters
+      event_category: category,
+      event_label: label,
+      value: value,
+      // Location parameters
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      page_title: document.title,
+      // Custom parameters
+      section_name: event === 'section_view' ? label.replace('Time in ', '') : undefined,
+      engagement_time: typeof value === 'number' ? value : undefined
+    });
+
+    console.log('GA4 Event Sent:', {
+      event: ga4Event,
+      params: {
+        event_category: category,
+        event_label: label,
+        value: value
+      }
+    });
 
     // Get user info
     const userId = localStorage.getItem('userId') || undefined
@@ -93,49 +127,6 @@ const useTracking = () => {
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
       console.log('Tracking:', trackingEvent)
-    }
-
-    // Send to Google Analytics with better structured data
-    if (window.gtag) {
-      if (event === 'section_view') {
-        console.log('Sending GA event:', {
-          event: 'screen_view',
-          section_name: label.replace('Time in ', ''),
-          engagement_time_msec: (value as number) * 1000,
-        });
-
-        window.gtag('event', 'screen_view', {
-          screen_name: label.replace('Time in ', ''),
-          engagement_time_msec: (value as number) * 1000,
-          custom_section_id: label.replace('Time in ', '').toLowerCase(),
-          custom_engagement_type: 'view',
-          custom_user_id: userId,
-          custom_session_id: sessionId,
-          page_title: document.title,
-          page_location: window.location.href,
-          page_path: window.location.pathname
-        });
-      } else {
-        // Map to standard GA4 events
-        const ga4EventMap = {
-          'click': 'select_content',
-          'pageview': 'page_view',
-          'scroll': 'scroll',
-          'timing': 'user_engagement',
-        };
-
-        const eventName = ga4EventMap[event as keyof typeof ga4EventMap] || event;
-
-        window.gtag('event', eventName, {
-          engagement_time_msec: typeof value === 'number' ? value * 1000 : undefined,
-          content_type: category,
-          item_id: label,
-          value: value,
-          page_title: document.title,
-          page_location: window.location.href,
-          page_path: window.location.pathname
-        });
-      }
     }
 
     // Store events locally

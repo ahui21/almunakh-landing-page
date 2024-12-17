@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
 import Link from "next/link"
 import { JsonLd } from "@/components/JsonLd"
+import { useTracking } from "@/hooks/useTracking"
 
 export function Hero() {
+  const { trackEvent } = useTracking();
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -19,6 +22,10 @@ export function Hero() {
       "availability": "https://schema.org/InStock"
     }
   }
+
+  React.useEffect(() => {
+    trackEvent('view', 'section', 'Hero Section');
+  }, [trackEvent]);
 
   return (
     <>
@@ -94,6 +101,18 @@ export function Hero() {
           </div>
         </div>
       </section>
+      <Button 
+        onClick={() => {
+          window.gtag('event', 'test_button_click', {
+            event_category: 'engagement',
+            event_label: 'Test Button',
+            value: 1
+          });
+          console.log('Test event sent');
+        }}
+      >
+        Test GA4
+      </Button>
     </>
   )
 } 
