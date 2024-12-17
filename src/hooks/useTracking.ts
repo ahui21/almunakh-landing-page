@@ -98,17 +98,48 @@ const useTracking = () => {
     // Send to Google Analytics with better structured data
     if (window.gtag) {
       if (event === 'section_view') {
-        window.gtag('event', 'section_engagement', {
+        console.log('Sending GA event:', {
+          event: 'view_section',
           section_name: label.replace('Time in ', ''),
-          engagement_time_msec: (value as number) * 1000, // Convert seconds to milliseconds
-          engagement_type: 'view'
-        })
+          engagement_time_msec: (value as number) * 1000,
+        });
+
+        window.gtag('event', 'view_section', {
+          engagement_time_msec: (value as number) * 1000,
+          section_name: label.replace('Time in ', ''),
+          section_id: label.replace('Time in ', '').toLowerCase(),
+          engagement_type: 'view',
+          user_id: userId,
+          session_id: sessionId,
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+        });
       } else {
-        window.gtag('event', event, {
+        console.log('Sending GA event:', {
+          event,
+          category,
+          label,
+          value
+        });
+
+        // Map common events to standard GA4 events
+        const eventName = {
+          'click': 'click',
+          'pageview': 'page_view',
+          'scroll': 'scroll',
+          'timing': 'user_engagement',
+        }[event] || event;
+
+        window.gtag('event', eventName, {
+          engagement_time_msec: typeof value === 'number' ? value * 1000 : undefined,
           event_category: category,
           event_label: label,
-          value: value
-        })
+          value: value,
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+        });
       }
     }
 
