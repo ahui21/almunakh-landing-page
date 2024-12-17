@@ -66,7 +66,7 @@ export function CaseStudies() {
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {caseStudies.map((study) => (
+          {caseStudies.map((study, index) => (
             <Card 
               key={study.title}
               className="overflow-hidden hover:scale-110 transition-transform duration-300 hover:shadow-xl"
@@ -75,6 +75,7 @@ export function CaseStudies() {
                 <OptimizedImage
                   {...study.image}
                   fill
+                  priority={index === 0}
                   className="object-cover"
                   sizes={{
                     mobile: 320,

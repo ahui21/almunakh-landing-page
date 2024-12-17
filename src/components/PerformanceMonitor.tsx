@@ -5,45 +5,66 @@ import { useEffect } from 'react'
 export function PerformanceMonitor() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Report Web Vitals
-      const reportWebVitals = (metric: {
-        name: string
-        value: number
-        rating?: 'good' | 'needs-improvement' | 'poor'
-        id?: string
-      }) => {
-        console.log(metric)
-        window.gtag?.('event', 'web_vitals', {
-          event_category: 'Web Vitals',
-          event_label: metric.name,
-          value: Math.round(metric.value),
-          metric_id: metric.id || '',
-          metric_value: metric.value,
-          metric_rating: metric.rating || 'good',
+      // Performance marks for key sections
+      const sections = ['hero', 'features', 'case-studies', 'testimonials']
+      
+      // Create an Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id
+            const loadTime = performance.now()
+            console.log(`Section ${sectionId} loaded at: ${Math.round(loadTime)}ms`)
+            
+            // Log all resources loaded for this section
+            if (window.performance && window.performance.getEntriesByType) {
+              const resources = performance.getEntriesByType('resource')
+              const sectionResources = resources.filter(r => 
+                r.name.includes(sectionId) || 
+                entry.target.querySelectorAll('img').forEach(img => 
+                  r.name.includes(img.src)
+                )
+              )
+              
+              sectionResources.forEach(resource => {
+                console.log(`  - ${resource.name}: ${Math.round(resource.duration)}ms`)
+              })
+            }
+          }
         })
-      }
+      })
 
-      // Monitor Performance
-      if (window.performance) {
-        const observer = new PerformanceObserver((list) => {
-          list.getEntries().forEach((entry) => {
-            reportWebVitals({
-              name: entry.name,
-              value: entry.startTime,
-              rating: 'good',
-              id: entry.entryType
+      // Observe all sections
+      sections.forEach(id => {
+        const element = document.getElementById(id)
+        if (element) observer.observe(element)
+      })
+
+      // Log initial page load metrics
+      window.addEventListener('load', () => {
+        if (window.performance) {
+          const timing = performance.timing
+          const navigationStart = timing.navigationStart
+          
+          console.log('Performance Metrics:')
+          console.log(`DNS lookup: ${timing.domainLookupEnd - timing.domainLookupStart}ms`)
+          console.log(`TCP connection: ${timing.connectEnd - timing.connectStart}ms`)
+          console.log(`DOM loading: ${timing.domComplete - timing.domLoading}ms`)
+          console.log(`First paint: ${performance.getEntriesByType('paint')[0]?.startTime}ms`)
+          
+          // Log slowest resources
+          const resources = performance.getEntriesByType('resource')
+          console.log('\nSlowest Resources:')
+          resources
+            .sort((a, b) => b.duration - a.duration)
+            .slice(0, 5)
+            .forEach(r => {
+              console.log(`${r.name}: ${Math.round(r.duration)}ms`)
             })
-          })
-        })
+        }
+      })
 
-        observer.observe({ 
-          entryTypes: [
-            'largest-contentful-paint',
-            'first-input',
-            'layout-shift'
-          ] 
-        })
-      }
+      return () => observer.disconnect()
     }
   }, [])
 

@@ -7,6 +7,7 @@ import Script from 'next/script'
 import { ClientLayout } from "@/components/ClientLayout"
 import { GA_ID } from '@/lib/constants'
 import { PerformanceMonitor } from '@/components/PerformanceMonitor'
+import { WebVitalsReporter } from '@/components/WebVitalsReporter'
 import { generateSchema } from '@/lib/schema'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -114,6 +115,26 @@ export default function RootLayout({
             `
           }}
         />
+
+        {/* Preload case study images */}
+        <link
+          rel="preload"
+          href="/images/case-studies/airplane.jpg"
+          as="image"
+          type="image/jpeg"
+        />
+        <link
+          rel="preload"
+          href="/images/case-studies/grocery.jpg"
+          as="image"
+          type="image/jpeg"
+        />
+        <link
+          rel="preload"
+          href="/images/case-studies/skiresort.jpg"
+          as="image"
+          type="image/jpeg"
+        />
       </head>
       <body className={inter.className}>
         <Navigation />
@@ -122,6 +143,7 @@ export default function RootLayout({
         </ClientLayout>
         <Toaster />
         <PerformanceMonitor />
+        <WebVitalsReporter />
       </body>
     </html>
   )
