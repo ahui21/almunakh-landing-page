@@ -72,11 +72,8 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${GA_ID}', {
-                debug_mode: true,
                 send_page_view: true
               });
-              // Enable debug mode explicitly
-              gtag('set', 'debug_mode', true);
             `
           }}
         />

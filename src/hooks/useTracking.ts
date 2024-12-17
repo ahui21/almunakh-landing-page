@@ -91,50 +91,21 @@ const useTracking = () => {
       engagement_time: typeof value === 'number' ? value : undefined
     });
 
-    console.log('GA4 Event Sent:', {
-      event: ga4Event,
-      params: {
-        event_category: category,
-        event_label: label,
-        value: value
-      }
-    });
-
-    // Get user info
-    const userId = localStorage.getItem('userId') || undefined
-    const sessionId = localStorage.getItem('sessionId') || 
-      `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    
-    // Ensure we always have a sessionId
-    if (!localStorage.getItem('sessionId')) {
-      localStorage.setItem('sessionId', sessionId)
-    }
-
-    const userType = userId ? 'authenticated' : 'anonymous'
-    const isOwnDevice = localStorage.getItem(MY_DEVICE_KEY) === 'true'
-
-    const trackingEvent: TrackingEvent = {
-      event,
-      category,
-      label,
-      value,
-      timestamp: Date.now(),
-      userId,
-      userType,
-      sessionId,
-      page: window.location.pathname,
-      isOwnDevice
-    }
-
-    // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Tracking:', trackingEvent)
-    }
-
     // Store events locally
     try {
       const events = JSON.parse(localStorage.getItem('tracking_events') || '[]')
-      events.push(trackingEvent)
+      events.push({
+        event,
+        category,
+        label,
+        value,
+        timestamp: Date.now(),
+        userId: localStorage.getItem('userId') || undefined,
+        userType: localStorage.getItem('userId') ? 'authenticated' : 'anonymous',
+        sessionId: localStorage.getItem('sessionId'),
+        page: window.location.pathname,
+        isOwnDevice: localStorage.getItem(MY_DEVICE_KEY) === 'true'
+      })
       localStorage.setItem('tracking_events', JSON.stringify(events))
     } catch (error) {
       console.error('Error storing tracking event:', error)
