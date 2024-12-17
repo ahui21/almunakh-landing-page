@@ -74,9 +74,10 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', '${GA_ID}', {
                 debug_mode: true,
-                measurement_id: '${GA_ID}',
                 send_page_view: true
               });
+              // Enable debug mode explicitly
+              gtag('set', 'debug_mode', true);
             `
           }}
         />

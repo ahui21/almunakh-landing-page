@@ -103,15 +103,18 @@ export function Hero() {
       </section>
       <Button 
         onClick={() => {
-          window.gtag('event', 'test_button_click', {
+          // Send a standard GA4 event
+          window.gtag('event', 'button_click', {
+            debug_mode: true,  // Enable debug for this event
             event_category: 'engagement',
             event_label: 'Test Button',
-            value: 1
+            value: 1,
+            send_to: GA_ID  // Add explicit destination
           });
-          console.log('Test event sent');
+          console.log('Test event sent with debug mode');
         }}
       >
-        Test GA4
+        Test GA4 Debug
       </Button>
     </>
   )
