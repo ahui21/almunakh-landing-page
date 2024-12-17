@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
 import Link from "next/link"
 import { JsonLd } from "@/components/JsonLd"
-import { useTracking } from "@/hooks/useTracking"
+import useTracking from "@/hooks/useTracking"
 
 export function Hero() {
   const { trackEvent } = useTracking();
