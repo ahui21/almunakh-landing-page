@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Almunakh - Climate Risk Management Platform",
   description: "Transform climate uncertainty into business resilience with Almunakh's real-time risk assessment and adaptive strategies. Get actionable climate insights for your business.",
-  keywords: "climate risk management, business resilience, climate analytics, weather risk, climate data, sustainability, risk assessment",
+  keywords: ["climate risk management", "business resilience", "climate analytics", "weather risk", "climate data", "sustainability", "risk assessment"],
   openGraph: {
     title: "Almunakh - Climate Risk Management Platform",
     description: "Transform climate uncertainty into business resilience with real-time climate risk analytics",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Almunakh",
     images: [
       {
-        url: "https://almunakh.com/og-image.jpg", // Add your OG image
+        url: "https://almunakh.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Almunakh Platform Preview",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Almunakh - Climate Risk Management Platform",
     description: "Transform climate uncertainty into business resilience with real-time climate risk analytics",
-    images: ["https://almunakh.com/twitter-image.jpg"], // Add your Twitter image
+    images: ["https://almunakh.com/twitter-image.jpg"],
   },
   robots: {
     index: true,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   }
-}
+} satisfies Metadata
 
 const GA_ID = 'G-T7YGE17L4W'
 

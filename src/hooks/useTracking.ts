@@ -5,7 +5,16 @@ import { useEffect, useCallback, useState } from 'react'
 
 declare global {
   interface Window {
-    gtag: (command: string, ...args: any[]) => void
+    gtag: (
+      command: 'event' | 'config' | 'js',
+      eventName: string,
+      eventParams?: {
+        event_category?: string
+        event_label?: string
+        value?: number | string
+        [key: string]: any
+      }
+    ) => void
     dataLayer: any[]
   }
 }
