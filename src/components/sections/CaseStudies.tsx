@@ -3,43 +3,44 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link"
 
 const caseStudies = [
   {
-    title: "Manufacturing Resilience",
-    company: "Global Motors Corp.",
-    description: "How a leading automotive manufacturer reduced weather-related disruptions by 75% and saved $12M annually",
-    metrics: [
-      { label: "Cost Savings", value: "$12M" },
-      { label: "Disruption Reduction", value: "75%" },
-      { label: "ROI", value: "486%" }
+    title: "Operational Resilience",
+    company: "Fortune 500 Airline",
+    description: "Real-time climate action plans identify how weather will cause changes to flight operations, and instantly adjust for such impacts.",
+    bullets: [
+      "New risks: increase in aircraft swaps and cancellations, with passenger rebooking impacts mitigated through dynamic load management",
+      "New risks: more frequent unsafe conditions for employees, managed through effective workforce scheduling and investment in new technologies",
+      "New opportunities: shift in customer demand for routes to more temperate climates, leading to new revenue streams when proactively planned for",
     ],
-    image: "/images/case-studies/manufacturing.jpg",
-    industry: "Manufacturing"
+    image: "/images/case-studies/airplane.jpg",
+    industry: "Airlines"
   },
   {
     title: "Supply Chain Optimization",
-    company: "LogiTech Solutions",
-    description: "Transforming supply chain vulnerability into operational strength through predictive climate analytics",
-    metrics: [
-      { label: "Route Optimization", value: "43%" },
-      { label: "Carbon Reduction", value: "31%" },
-      { label: "Cost Efficiency", value: "28%" }
+    company: "Fortune 100 Retailer",
+    description: "Predictive climate analytics calculate the impact of short-term and long-term climate shifts, and proactively identify better alternatives.",
+    bullets: [
+      "New risks: greater climate exposure for specific key commodities, with impacts mitigated through early identification and proper management",
+      "New risks: higher likelihood of blackouts and power outages during extreme weather events, managed through more resilient energy storage solutions",
+      "New opportunities: relocation of customers to more climate-resilient regions, resulting in new revenue streams for suitably-planned future store locations",
     ],
-    image: "/images/case-studies/logistics.jpg",
-    industry: "Logistics"
+    image: "/images/case-studies/grocery.jpg",
+    industry: "Retail"
   },
   {
-    title: "Agricultural Innovation",
-    company: "FarmFresh Enterprises",
-    description: "Leveraging climate data to enhance crop yields and reduce resource waste in sustainable farming",
-    metrics: [
-      { label: "Yield Increase", value: "35%" },
-      { label: "Water Savings", value: "42%" },
-      { label: "Waste Reduction", value: "28%" }
+    title: "Financial Scenario Modeling",
+    company: "Major Mountain Resort Company",
+    description: "Automated climate risk assessments translate complex climate data into actionable financial insights, enabling executives to forecast more accurately and confidently.",
+    bullets: [
+      "New risks: shorter ski seasons result in reduced revenue, mitigated through shifts in marketing strategies when impacts are identified early",
+      "New opportunities: longer summers introduce new uses such as mountain biking and hiking, which can be monetized through new activities and services",
+      "New opportunities: industry-wide challenges enable businesses with climate knowledge to act before their competitors, ensuring growth in market share"
     ],
-    image: "/images/case-studies/agriculture.jpg",
-    industry: "Agriculture"
+    image: "/images/case-studies/skiresort.jpg",
+    industry: "Tourism"
   }
 ]
 
@@ -63,7 +64,7 @@ export function CaseStudies() {
               <div className="relative h-48">
                 <Image
                   src={study.image}
-                  alt={`${study.company} case study showing ${study.title} with ${study.metrics[0].value} ${study.metrics[0].label}`}
+                  alt={`${study.company} case study showing ${study.title} with ${study.bullets[0]}`}
                   fill
                   className="object-cover"
                 />
@@ -83,15 +84,25 @@ export function CaseStudies() {
                   {study.description}
                 </p>
                 
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {study.metrics.map((metric) => (
-                    <div key={metric.label} className="text-center">
-                      <div className="text-2xl font-bold text-primary">
-                        {metric.value}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {metric.label}
-                      </div>
+                <div className="space-y-2 mb-6">
+                  {study.bullets.map((bullet) => (
+                    <div key={bullet} className="flex items-start">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-primary flex-shrink-0" />
+                      <p className="ml-3 text-gray-600 text-sm">
+                        {bullet.startsWith("New risks:") ? (
+                          <span>
+                            <span className="font-bold text-red-500">New risks:</span>
+                            {bullet.slice("New risks:".length)}
+                          </span>
+                        ) : bullet.startsWith("New opportunities:") ? (
+                          <span>
+                            <span className="font-bold text-green-500">New opportunities:</span>
+                            {bullet.slice("New opportunities:".length)}
+                          </span>
+                        ) : (
+                          bullet
+                        )}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -99,9 +110,12 @@ export function CaseStudies() {
                 <Button 
                   variant="ghost" 
                   className="w-full justify-between hover:bg-primary/5"
+                  asChild
                 >
-                  Read Full Case Study
-                  <ArrowRight className="w-4 h-4" />
+                  <Link href="https://casestudies.almunakh.com">
+                    Read Full Case Study
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -113,9 +127,12 @@ export function CaseStudies() {
             size="lg"
             variant="outline"
             className="hover:bg-primary/5"
+            asChild
           >
-            View All Case Studies
-            <ArrowRight className="ml-2 w-5 h-5" />
+            <Link href="https://casestudies.almunakh.com">
+              View All Case Studies
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
           </Button>
         </div>
       </div>

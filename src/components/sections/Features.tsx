@@ -65,11 +65,11 @@ export function Features() {
             return (
               <Card 
                 key={feature.title}
-                className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="hover:scale-110 transition-transform duration-300 hover:shadow-xl"
               >
-                <CardContent className="pt-6">
+                <CardContent className="p-6">
                   <Icon className={`w-12 h-12 ${feature.color} mb-6`} />
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-3">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600">
