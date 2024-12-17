@@ -99,42 +99,37 @@ const useTracking = () => {
     if (window.gtag) {
       if (event === 'section_view') {
         console.log('Sending GA event:', {
-          event: 'view_section',
+          event: 'screen_view',
           section_name: label.replace('Time in ', ''),
           engagement_time_msec: (value as number) * 1000,
         });
 
-        window.gtag('event', 'view_section', {
+        window.gtag('event', 'screen_view', {
+          screen_name: label.replace('Time in ', ''),
           engagement_time_msec: (value as number) * 1000,
-          section_name: label.replace('Time in ', ''),
-          section_id: label.replace('Time in ', '').toLowerCase(),
-          engagement_type: 'view',
-          user_id: userId,
-          session_id: sessionId,
+          custom_section_id: label.replace('Time in ', '').toLowerCase(),
+          custom_engagement_type: 'view',
+          custom_user_id: userId,
+          custom_session_id: sessionId,
           page_title: document.title,
           page_location: window.location.href,
           page_path: window.location.pathname
         });
       } else {
-        console.log('Sending GA event:', {
-          event,
-          category,
-          label,
-          value
-        });
-
-        // Map common events to standard GA4 events
-        const eventName = {
-          'click': 'click',
+        // Map to standard GA4 events
+        const ga4EventMap = {
+          'click': 'select_content',
           'pageview': 'page_view',
           'scroll': 'scroll',
           'timing': 'user_engagement',
-        }[event] || event;
+        };
+
+        const eventName = ga4EventMap[event as keyof typeof ga4EventMap] || event;
 
         window.gtag('event', eventName, {
           engagement_time_msec: typeof value === 'number' ? value * 1000 : undefined,
-          event_category: category,
-          event_label: label,
+          content_type: category,
+          item_id: label,
           value: value,
           page_title: document.title,
           page_location: window.location.href,
