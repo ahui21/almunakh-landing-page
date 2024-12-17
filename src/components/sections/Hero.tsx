@@ -34,7 +34,7 @@ export function Hero() {
       <JsonLd data={structuredData} />
       <section 
         id="hero" 
-        className="relative min-h-[80vh] flex items-center bg-black overflow-hidden"
+        className="relative min-h-[65vh] flex items-center bg-black overflow-hidden"
         aria-label="Introduction to Almunakh"
       >
         <div className="absolute inset-0 opacity-5 bg-[url('/images/noise.png')] pointer-events-none" />
@@ -93,7 +93,7 @@ export function Hero() {
                 {...IMAGES.hero.earth}
                 fill
                 priority
-                className="object-contain"
+                className="object-contain scale-90"
                 unoptimized
               />
             </div>

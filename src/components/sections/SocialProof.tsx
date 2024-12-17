@@ -90,15 +90,20 @@ export function SocialProof() {
   ]
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-xl font-semibold text-primary mb-4">
-            Backed by research and data from:
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section 
+      id="social-proof" 
+      className="py-12"
+    >
+      <div className="container">
+        <h2 
+          className="text-3xl font-bold text-center mb-8"
+        >
+          Backed by research and data from:
+        </h2>
+        
+        <div 
+          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+        >
           {clients.map((client) => (
             <div 
               key={client.name}

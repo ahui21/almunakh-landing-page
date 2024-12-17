@@ -17,18 +17,19 @@ export function PerformanceMonitor() {
             console.log(`Section ${sectionId} loaded at: ${Math.round(loadTime)}ms`)
             
             // Log all resources loaded for this section
-            if (window.performance && window.performance.getEntriesByType) {
+            try {
               const resources = performance.getEntriesByType('resource')
-              const sectionResources = resources.filter(r => 
-                r.name.includes(sectionId) || 
-                entry.target.querySelectorAll('img').forEach(img => 
-                  r.name.includes(img.src)
-                )
-              )
+              const sectionResources = resources.filter(r => {
+                const imgs = entry.target.querySelectorAll('img')
+                return r.name.includes(sectionId) || 
+                  Array.from(imgs).some(img => r.name.includes(img.src))
+              })
               
               sectionResources.forEach(resource => {
                 console.log(`  - ${resource.name}: ${Math.round(resource.duration)}ms`)
               })
+            } catch (error) {
+              console.warn('Performance API not fully supported:', error)
             }
           }
         })
@@ -42,15 +43,19 @@ export function PerformanceMonitor() {
 
       // Log initial page load metrics
       window.addEventListener('load', () => {
-        if (window.performance) {
+        try {
           const timing = performance.timing
-          const navigationStart = timing.navigationStart
           
           console.log('Performance Metrics:')
           console.log(`DNS lookup: ${timing.domainLookupEnd - timing.domainLookupStart}ms`)
           console.log(`TCP connection: ${timing.connectEnd - timing.connectStart}ms`)
           console.log(`DOM loading: ${timing.domComplete - timing.domLoading}ms`)
-          console.log(`First paint: ${performance.getEntriesByType('paint')[0]?.startTime}ms`)
+          
+          const paintEntries = performance.getEntriesByType('paint')
+          const firstPaint = paintEntries[0]?.startTime
+          if (firstPaint) {
+            console.log(`First paint: ${Math.round(firstPaint)}ms`)
+          }
           
           // Log slowest resources
           const resources = performance.getEntriesByType('resource')
@@ -61,6 +66,8 @@ export function PerformanceMonitor() {
             .forEach(r => {
               console.log(`${r.name}: ${Math.round(r.duration)}ms`)
             })
+        } catch (error) {
+          console.warn('Performance API not fully supported:', error)
         }
       })
 
