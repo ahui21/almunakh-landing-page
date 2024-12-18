@@ -58,7 +58,7 @@ export function Hero() {
                   <div className="flex-1 sm:flex-initial">
                     <Button 
                       size="lg"
-                      className="bg-secondary-green hover:bg-secondary-green/90 text-white w-full text-base py-4"
+                      className="bg-secondary-green hover:bg-secondary-green/90 text-white w-full text-base py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                       asChild
                     >
                       <Link href="https://app.almunakh.com">
@@ -70,7 +70,7 @@ export function Hero() {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    className="border-primary text-primary hover:bg-primary/10 w-full sm:w-auto text-base py-4"
+                    className="border-primary text-primary hover:text-primary hover:bg-primary/10 w-full sm:w-auto text-base py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                     asChild
                   >
                     <Link href="https://demo.almunakh.com">

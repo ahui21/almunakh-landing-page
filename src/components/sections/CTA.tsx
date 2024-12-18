@@ -28,17 +28,17 @@ export function CTA() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="bg-secondary-green text-white hover:bg-secondary-green/90"
+              className="bg-secondary-green hover:bg-secondary-green/90 text-white w-full sm:w-auto text-base py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               asChild
             >
               <Link href="https://app.almunakh.com">
-                Get Your Initial Assessment Now
+                Get Your Almunakh Assessment
               </Link>
             </Button>
             <Button 
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white/10"
+              className="border-white text-white hover:text-white hover:bg-white/10 w-full sm:w-auto text-base py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               asChild
             >
               <Link href="https://demo.almunakh.com">
