@@ -14,11 +14,11 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://almunakh.com'),
-  title: "Almunakh - Climate Risk Management Platform",
+  title: "Almunakh – AI-Driven Climate Impact Management",
   description: "Transform climate uncertainty into business resilience with Almunakh's real-time risk assessment and adaptive strategies. Get actionable climate insights for your business.",
   keywords: ["climate risk management", "business resilience", "climate analytics", "weather risk", "climate data", "sustainability", "risk assessment"],
   openGraph: {
-    title: "Almunakh - Climate Risk Management Platform",
+    title: "Almunakh – AI-Driven Climate Impact Management",
     description: "Transform climate uncertainty into business resilience with real-time climate risk analytics",
     url: "https://almunakh.com",
     siteName: "Almunakh",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Almunakh - Climate Risk Management Platform",
+    title: "Almunakh – AI-Driven Climate Impact Management",
     description: "Transform climate uncertainty into business resilience with real-time climate risk analytics",
     images: ["https://almunakh.com/twitter-image.jpg"],
   },
